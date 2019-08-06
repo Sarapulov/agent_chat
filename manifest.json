@@ -2,7 +2,7 @@
   "name": "Agent Chat",
   "author": {
     "name": "AS",
-    "email": "asarapulov@zendesk.com",
+    "email": "example@example.com",
     "url": ""
   },
   "defaultLocale": "en",
@@ -18,7 +18,7 @@
       "name": "widget_key",
       "type": "text",
       "required": true,
-      "default": "3e9cab8b-9836-4495-9bec-e4d677fb2d6a"
+      "default": "3e9cab8b-9836-4495-9bec-SOMETHING"
     },
     {
       "name": "chat_department_settings",
@@ -26,6 +26,6 @@
       "default": "{\"select\":\"Development & Performance\"}"
     }
   ],
-  "version": "1.1",
+  "version": "1.2",
   "frameworkVersion": "2.0"
 }

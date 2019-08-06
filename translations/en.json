@@ -3,11 +3,11 @@
     "name": "Agent Chat",
     "short_description": "Show Zendesk Widget inside Zendesk Support",
     "long_description": "Show Zendesk Widget inside Zendesk Support so Agents can chat and/or using Widget features without leaving their environment.",
-    "installation_instructions": "Install > Provide Widget Key in the app settings, for example: `3e9cab8b-9836-4495-9bec-e4d677fb2d6a`. Provide stringified JSON for chat departments settings like `{\"select\":\"Development & Performance\"}`",
+    "installation_instructions": "Install > Provide Widget Key in the app settings, for example: `3e9cab8b-9836-4495-9bec-SOMETHING`. Provide stringified JSON for chat departments settings like `{\"select\":\"Development & Performance\"}`",
     "parameters": {
       "widget_key": {
         "label": "Widget key",
-        "helpText": "Provide Widget Key in the app settings, for example: `3e9cab8b-9836-4495-9bec-e4d677fb2d6a`. Find it on your Widget snippet."
+        "helpText": "Provide Widget Key in the app settings, for example: `3e9cab8b-9836-4495-9bec-SOMETHING`. Find it on your Widget snippet."
       },
       "chat_department_settings": {
         "label": "Zendesk Chat Departments JSON",

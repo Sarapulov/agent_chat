@@ -8,7 +8,7 @@ Show Zendesk Widget inside Zendesk Support so Agents can chat and/or using Widge
 
 ### Settings
 
-- `widget_key` - Something like that `3e9cab8b-9836-4495-9bec-e4d677fb2d6a` Can be taken from the Widget snippet available in Zendesk Support Admin settings.
+- `widget_key` - Something like that `3e9cab8b-9836-4495-9bec-SOMETHING` Can be taken from the Widget snippet available in Zendesk Support Admin settings.
 - `chat_department_settings` - stringified JSON object like `{\"select\":\"Development & Performance\"}` Example of a full object is below
 
 ```
