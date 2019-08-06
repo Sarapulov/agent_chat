@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/@zendeskgarden/css-bedrock@7.0.21,npm/@zendeskgarden/css-utilities@4.3.0">
+</head>
+<body>
+
+  <script type="text/javascript">
+    window.zESettings = {
+      webWidget: {
+        offset: {
+          vertical: '30px'
+        }
+      }
+    };
+  </script>
+
+  <script src="https://assets.zendesk.com/apps/sdk/2.0/zaf_sdk.js"></script>
+  
+  <script>
+
+    (function(client) {
+      
+      client.context()
+      .then(function(context) {
+        return context.location;
+      })
+      .then(function(location) {
+        if (location == 'nav_bar') client.invoke('preloadPane');
+        if (location == 'top_bar') {
+          client.invoke('resize', {
+            width: '370px',
+            height: '650px'
+          })
+          client.invoke('popover', {
+            width: '370px',
+            height: '650px'
+          });
+        }
+        return client.metadata();
+      })
+      .then(function(metadata) {
+        fireWidgetOnLoad(metadata.settings.widget_key);
+      })
+
+
+      function fireWidgetOnLoad(WIDGET_KEY) {
+        
+        var zendeskScript = document.createElement('script');
+        zendeskScript.src = 'https://static.zdassets.com/ekr/snippet.js?key=' + WIDGET_KEY;
+        zendeskScript.id = 'ze-snippet';
+
+        zendeskScript.addEventListener('load', function() {
+
+          console.log("Widget loaded");
+          // openWidget() // doesn't show the Widget at all
+          widgetShow();
+          preSetWidgetFields();
+        
+        });
+
+        document.getElementsByTagName('body')[0].appendChild(zendeskScript);
+      }
+
+      function widgetShow(){
+          zE('webWidget', 'show');
+          zE('webWidget', 'open');
+      }
+
+      function preSetWidgetFields() {
+        client.get('currentUser')
+        .then(function(user) {
+          return user.currentUser;
+        })
+        .then(function(currentUser) {          
+          zE('webWidget', 'identify', {
+              name: currentUser.name,
+              email: currentUser.email,
+              phone: currentUser.phone
+          });
+
+          zE('webWidget', 'prefill', {
+            name: {
+              value: currentUser.name,
+              readOnly: true // optional
+            },
+            email: {
+              value: currentUser.email,
+              readOnly: true // optional
+            },
+            phone: {
+              value: currentUser.phone,
+              readOnly: true // optional
+            }
+          });
+
+          return client.metadata();
+
+        })
+        .then(function(metadata) {
+          var dep = metadata.settings.chat_department_settings;
+          if (dep) dep = JSON.parse(dep);
+
+          zE('webWidget', 'updateSettings', {
+              webWidget: {
+                  chat: {
+                      departments: dep
+                  }
+              }
+          })
+        })
+      }
+
+      function openWidget() {
+         
+      if (zE('webWidget:get', 'display') !== 'chat') {
+            zE('webWidget', 'updateSettings', {
+                helpCenter: { 'suppress': true },
+                contactForm: { 'suppress': true },
+                talk: { 'suppress': true },
+                answerBot: { 'suppress': true }
+            });
+             _widgetShow();
+        }
+                         
+      }
+
+    })(ZAFClient.init())
+    
+  </script>
+</body>
+</html>
